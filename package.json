@@ -7,17 +7,28 @@
     "pyserve": "cd out; python3 -m http.server"
   },
   "dependencies": {
+    "@material-ui/core": "^4.7.1",
+    "@material-ui/styles": "^4.7.1",
     "axios": "^0.18.0",
+    "bootstrap": "^4.4.1",
+    "google-map-react": "^1.1.5",
     "mobx": "^5.0.3",
     "mobx-react": "^5.2.3",
     "next": "^7.0.0",
     "nextjs": "0.0.3",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-dom": "^16.12.0",
+    "react-google-maps": "^9.4.5",
+    "react-number-format": "^4.3.1",
+    "recharts": "^2.0.0-beta.1",
+    "redux": "^4.0.4",
+    "video-react": "^0.14.1"
   },
   "devDependencies": {
-    "webpack": "^4.19.1",
     "@zeit/next-sass": "^1.0.1",
-    "node-sass": "^4.9.3"
+    "node-sass": "^4.9.3",
+    "video.js": "^7.6.6",
+    "webpack": "^4.19.1"
   }
 }

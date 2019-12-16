@@ -4,7 +4,7 @@
  * Currently only selects between AJAX and localstorage API class.
  */
 
-const IS_API_LOCALSTORAGE = true;
+const IS_API_LOCALSTORAGE = false;
 
 
 import api_ajax from "./serverapi_ajax";

@@ -19,13 +19,13 @@ export default class About extends React.Component {
             <Head>
                 <title>About</title>
             </Head>
+                <h2>Renting A home</h2>
 
-            <h2>About</h2>
-
-            <p>This is an empty about page.</p>
-
-            <p className="example">
-                This is styled via inline CSS in about.jsx</p>
+                <p>Monthly payments increase usually 3% per year</p>
+                <p>No tax benefits</p>
+                <p>Lose money - No equity built.</p>
+                <p>Each Year you have a lease dead line</p>
+                <p>Less security, you will need to move at any time.</p>
 
             <style jsx>{`
                 p.example {

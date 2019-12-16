@@ -36,7 +36,7 @@ export default class MyApp extends App {
             {/* global sass styles
                 pages may also define Head which is merged with this */}
             <Head>
-                <title>React + Nextjs + MobX starter</title>
+                <title>Upwards Movement</title>
 
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="shortcut icon" href="/static/favicon.ico" />
@@ -50,13 +50,28 @@ export default class MyApp extends App {
                 </article>
 
                 <aside className="sidebar-right">
-                Sidebar
+                    <h2>Owning A Home</h2>
+
+                    <p><strong>build equity </strong></p>
+
+                    <p className="example">
+                        Take advantage of Tax Breaks for Homeowners.</p>
+                    <p><strong>Total control</strong></p>
+
+                    <p className="example">
+                        over your living space (decoration improvements, etc.)</p>
+                    <p className="example">
+                        <strong> Fixed rates for stable Mortgage payments</strong>
+                        Your mortgage payment will not increase over the life of the loan</p>
+                    <p className="example">
+                Buying a home allows a FAMILY to find a place where they know they can stay</p>
+
                 </aside>
 
-                <footer> Footer
+                <footer> Schedule A Showing
                     <Link href="/"><a>Home</a></Link>
                     <Link href="/about"><a>About</a></Link>
-                    <a className="right" href="https://github.com/tomimick/tm-nextjs-starter">Source at Github</a>
+                    <a className="right" href="/Checkout">Get Pre-Approved</a>
                 </footer>
             </div>
             </Container>

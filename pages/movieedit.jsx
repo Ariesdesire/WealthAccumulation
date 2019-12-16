@@ -1,5 +1,5 @@
 
-/* Page to edit a movie.
+/* Page to edit a listing.
  *
  * A regular form with 2 fields and a button.
  *
@@ -28,7 +28,7 @@ export default class MovieEditView extends React.Component {
         this.onInputChange = this.onInputChange.bind(this);
         this.onBack = this.onBack.bind(this);
 
-        this.state = {movie: {title:"", director:"", id:""}, oldtitle:""};
+        this.state = {movie: {address:"", price:"", brokerRemarks:"", id:""}, oldtitle:""};
     }
 
     componentDidMount() {
@@ -48,7 +48,7 @@ export default class MovieEditView extends React.Component {
     onSubmit(e) {
         e.preventDefault();
 
-        if (!this.state.movie.title)
+        if (!this.state.movie.address)
             return;
 
         // save the data and go to front page
@@ -71,7 +71,7 @@ export default class MovieEditView extends React.Component {
 
     render () {
         const title = this.props.id ? 'Edit '+this.state.oldtitle
-            : 'Add a new movie';
+            : 'Add a new Listing';
 
         return (
 
@@ -84,13 +84,19 @@ export default class MovieEditView extends React.Component {
 
             <form onSubmit={this.onSubmit}>
             <div>
-            <label>Title:</label>
-            <input type="text" name="title" value={this.state.movie.title}
+            <label>Address:</label>
+            <input type="text" name="address" value={this.state.movie.address}
+                onChange={this.onInputChange} autoFocus autoComplete="off" />
+            </div>
+
+                <div>
+            <label>Price:</label>
+            <input type="number" name="price" value={this.state.movie.price}
                 onChange={this.onInputChange} autoFocus autoComplete="off" />
             </div>
             <div>
-            <label>Director:</label>
-            <input type="text" name="director" value={this.state.movie.director}
+            <label>brokerRemarks:</label>
+            <input type="text" name="brokerRemarks" value={this.state.movie.brokerRemarks}
                 onChange={this.onInputChange} autoComplete="off" />
             </div>
 

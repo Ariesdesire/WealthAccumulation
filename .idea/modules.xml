@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../HonestScales/honest_scales_server/.idea/honest_scales_server.iml" filepath="$PROJECT_DIR$/../HonestScales/honest_scales_server/.idea/honest_scales_server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mobileRealEstate/.idea/mobileRealEstate.iml" filepath="$PROJECT_DIR$/../mobileRealEstate/.idea/mobileRealEstate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/next-real.iml" filepath="$PROJECT_DIR$/.idea/next-real.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../react_mortgages/.idea/react_mortgages.iml" filepath="$PROJECT_DIR$/../react_mortgages/.idea/react_mortgages.iml" />
+      <module fileurl="file://$USER_HOME$/WebstormProjects/restful/.idea/restful.iml" filepath="$USER_HOME$/WebstormProjects/restful/.idea/restful.iml" />
+    </modules>
+  </component>
+</project>

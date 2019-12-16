@@ -13,7 +13,7 @@
 
 import axios from "axios"
 
-const URL_MOVIES = "http://localhost:8100/api/movies/";
+const URL_MOVIES = "https://honestscales.herokuapp.com/api/listings";
 
 class ServerAPI {
 
@@ -30,7 +30,7 @@ class ServerAPI {
     }
 
     get_movie(id) {
-        let url = `${URL_MOVIES}${id}`;
+        let url = `${URL_MOVIES}/${id}`;
         return this.client.get(url).then(reply => {return reply.data});
     }
 
@@ -41,13 +41,13 @@ class ServerAPI {
             return this.client.post(url, item);
         } else {
             // update
-            let url = `${URL_MOVIES}${item.id}`;
+            let url = `${URL_MOVIES}/${item.id}`;
             return this.client.put(url, item);
         }
     }
 
     delete_movie(id) {
-        let url = `${URL_MOVIES}${id}`;
+        let url = `${URL_MOVIES}/${id}`;
         return this.client.delete(url);
     }
 }

@@ -13,22 +13,31 @@ import Head from 'next/head'
 import Router from 'next/router'
 import { Player } from 'video-react';
 import api from "../config"
-
+import CssBaseline from '@material-ui/core/CssBaseline';
+import GoogleMapReact from 'google-map-react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropertyVisuals from './PropertyVisuals';
 import PropertyTour from './PropertyTour';
-import PropertyDetail from "./PropertyDetail";
+import Container from '@material-ui/core/Container';
 
-export default class MovieDetailView extends React.Component {
+const style = {
+    width: '400px',
+    height: '300px'
+}
+export default class Neighborhood extends React.Component {
 
     // query params to props
     static getInitialProps({query: { id }}) {
         return {id};
     }
-
+    static defaultProps = {
+        center: {lat: 40.73, lng: -73.93},
+        zoom: 12
+    }
+//the center coordinates are NYC. I chose 12 as the zoom because it didn’t seem too far away or too close. The higher the number you choose, the more you zoom in on the map.
     constructor(props) {
         super(props);
 
@@ -40,7 +49,7 @@ export default class MovieDetailView extends React.Component {
     }
 
     componentDidMount() {
-        console.info("MovieDetailView did mount", this.props);
+        console.info("Google Map Detail did mount", this.props);
 
 
         // get movie id (getInitialProps is not always called, Nextjs bug?)
@@ -49,6 +58,7 @@ export default class MovieDetailView extends React.Component {
         api.get_movie(movie_id).then(d => this.setState({movie: d}));
     }
 
+
     onDelete(e) {
         e.preventDefault();
 
@@ -56,8 +66,8 @@ export default class MovieDetailView extends React.Component {
             return;
 
         api.delete_movie(this.props.id)
-                .then(reply => Router.push('/'))
-                .catch(error => alert("Error occurred"));
+            .then(reply => Router.push('/'))
+            .catch(error => alert("Error occurred"));
     }
 
     onBack(e) {
@@ -68,22 +78,23 @@ export default class MovieDetailView extends React.Component {
     render () {
         return (
             <React.Fragment>
-            <Head>
-                <title>{this.state.movie.address || ''}</title>
-            </Head>
 
-            <h2>{this.state.movie.address} </h2>
-            <p>{this.state.movie.city} , {this.state.movie.state}   {this.state.movie.zipCode} </p>
-            <p>{this.state.movie.propertyType} </p>
-                <PropertyTour />
-                 <PropertyDetail/>
+                <CssBaseline />
 
-            {/*<a href="#" className="but back" onClick={this.onBack}>Back</a>*/}
+                <GoogleMapReact
+                    style={{width: '100%', height: 300, position: 'relative'}}
+                    bootstrapURLKeys={{
+                        key: 'AIzaSyBxiIepV_8nY4hq4slxiEAQ1TWJ56vSnYc',
+                        language: 'en'
+                    }}
+                    defaultCenter={this.props.center}
+                    center={this.state.center}
+                    defaultZoom={this.props.zoom}
+                    onChildMouseEnter={this.onChildMouseEnter}
+                    onChildMouseLeave={this.onChildMouseLeave}
 
-            {/*<Link href={"/movieedit?id="+this.state.movie.id}>*/}
-            {/*    <a className="but">Edit</a></Link>*/}
-            {/*<a className="but right delete" href="#"*/}
-            {/*    onClick={this.onDelete}>Delete</a>*/}
+                />
+
 
             </React.Fragment>
         )
