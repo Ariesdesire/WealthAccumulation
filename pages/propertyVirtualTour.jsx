@@ -69,7 +69,7 @@ export default class PropertyVirtualTour extends React.Component {
                 <iframe
                     frameBorder="0"
                     width="100%"
-                    height="360px"
+                    height="500px"
                     scrolling="no"
                     allowFullScreen
                     src=" https://upwardmovent.s3.amazonaws.com/4442Seton/VirtualTour/output/index.html?image=/images/converted.jpg&is_stereo=true">

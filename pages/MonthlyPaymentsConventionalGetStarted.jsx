@@ -33,9 +33,21 @@ import NumberFormat from 'react-number-format';
 import FhaMonthlyPaymentsChart from "./MonthlyPaymentsChart";
 import Grid from '@material-ui/core/Grid';
 import MonthlyEquity from "./MonthlyEquityChart";
-import MonthlyPaymentsFhaGetStarted from "./MonthlyPaymentsFhaGetStarted";
-export default class PropertyOverview extends React.Component {
+import ConventionalMonthlyPaymentChart
+    from "./MonthlyPaymentsChartConventional";
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
+}));
+
+export default class MonthlyPaymentsStart extends React.Component {
+    classes = useStyles();
     // query params to props
     static getInitialProps({query: { id }}) {
         return {id};
@@ -91,10 +103,10 @@ export default class PropertyOverview extends React.Component {
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <Typography variant="h6" gutterBottom align="center">
-                            Fixed rates for stable mortgage payments
+                            How much house can I afford
                         </Typography>
                         <Typography variant="body1" gutterBottom  align="center">
-                            Your payments will not increase over the life of the loan
+                           Conventional 20% Down
                         </Typography>
                     </Grid>
 
@@ -105,40 +117,51 @@ export default class PropertyOverview extends React.Component {
                             aria-labelledby="Estimated-Monthly-Costs"
                             subheader={
                                 <ListSubheader component="div" id="Estimated Monthly Costs">
-                                    Estimated Monthly Costs
-                                    <NumberFormat value={this.state.movie.FHAMonthlyPayments} displayType={'text'} thousandSeparator={true}  prefix={' $'} />
+                                    Estimated Annual Income Needed
+                                    <NumberFormat value={this.state.movie.conventionalIncomeNeeded } displayType={'text'} thousandSeparator={true}  prefix={' $'} />
                                 </ListSubheader>
                             }
 
                         >
                             <ListItem button>
 
-                                <ListItemText primary="Principal & Interest" secondary=  <NumberFormat value={this.state.movie.FHAPrincipalInterest} displayType={'text'} thousandSeparator={true}  prefix={'$'} />  />
+                                <ListItemText primary="Price" secondary=  <NumberFormat value={this.state.movie.ListingPrice} displayType={'text'} thousandSeparator={true}  prefix={'$'} />  />
+                            </ListItem>
+
+                            <ListItem button>
+
+                                <ListItemText primary="Down Payment"  secondary=  <NumberFormat value= {this.state.movie.ConventionalDownPayment} displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
                             </ListItem>
                             <ListItem button>
 
-                                <ListItemText primary="Mortgage Insurance "  secondary=  <NumberFormat value= {this.state.movie.FHAMortgageInsurance } displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
+                                <ListItemText primary="Closing Costs"  secondary=<NumberFormat value={this.state.movie.ConventionalClosingCostAmount}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
                             </ListItem>
-                            <ListItem button>
 
-                                <ListItemText primary="Property Taxes"  secondary=  <NumberFormat value= {this.state.movie.PropertyTaxes} displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
-                            </ListItem>
-                            <ListItem button>
-
-                                <ListItemText primary="HOA Fees"  secondary=<NumberFormat value={this.state.movie.HOAFees}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
-                            </ListItem>
+                            <ListSubheader component="div" id="Estimated Monthly Costs">
+                                Estimated Monthly Costs
+                                <NumberFormat value={this.state.movie.ConventionalMonthlyPayments} displayType={'text'} thousandSeparator={true}  prefix={' $'} />
+                            </ListSubheader>
 
                         </List>
 
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <FhaMonthlyPaymentsChart />
+                        <ConventionalMonthlyPaymentChart />
                     </Grid>
 
 
                 </Grid>
 
+                <div className={classes.root}>
 
+                    <Button variant="contained" color="primary">
+                      5 years wealth Accumulation
+                    </Button>
+                    <Button variant="contained" color="secondary">
+                      10 years wealth Accumulation
+                    </Button>
+
+                </div>
             </React.Fragment>
         )
     }

@@ -18,9 +18,14 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import PropertyVisuals from './PropertyVisuals';
+import fire from "../fire";
+import ReactGA from 'react-ga';
+
 import PropertyTour from './PropertyTour';
 import PropertyDetail from "./PropertyDetail";
+import ReactPixel from 'react-facebook-pixel';
+
+
 
 export default class MovieDetailView extends React.Component {
 
@@ -47,8 +52,21 @@ export default class MovieDetailView extends React.Component {
         let movie_id = this.props.id ? this.props.id : (new URLSearchParams(window.location.search)).get("id");
 
         api.get_movie(movie_id).then(d => this.setState({movie: d}));
+        // analytics.setCurrentScreen('Property Detail' + movie_id);
+        // fire.analytics().setCurrentScreen('Property Detail' + movie_id);
+        // this.initializeAnalytics();
+        ReactGA.pageview('Property Detail ' + movie_id);
+
+
     }
 
+    // initializeAnalytics() {
+    //     let movie_id = this.props.id ? this.props.id : (new URLSearchParams(window.location.search)).get("id");
+    //
+    //     ReactGA.initialize('UA-156112925-1');
+    //     ReactGa.pageview('Property Detail' + movie_id);
+    //
+    // }
     onDelete(e) {
         e.preventDefault();
 

@@ -4,20 +4,37 @@
  */
 
 import App, {Container} from 'next/app'
-import React from 'react'
+
+import React, { useEffect } from 'react';
 import Head from 'next/head'
 import Link from 'next/link'
 
 import MyHeader from "../components/MyHeader"
-
+import ReactGA from 'react-ga';
+import { createBrowserHistory } from 'history';
+import { Router } from 'react-router-dom';
 // required here for hot reload
 import css from "../styles/layout.sass"
-
 import store from "../store"
 import api from "../config"
+import ReactPixel from 'react-facebook-pixel';
 
+import { makeStyles } from '@material-ui/core/styles';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
+ReactGA.initialize('UA-156112925-1', { debug: true });
+const useStyles = makeStyles({
+    root: {
+        width: 500,
+    },
+});
 export default class MyApp extends App {
+
+
 
     componentDidMount() {
         console.info("app did mount");
@@ -26,11 +43,15 @@ export default class MyApp extends App {
         // gets loaded first (actually we just need the count in the header
         // but for simplicity there is no separate API for count only)
         api.query_movies().then(movies => store.set_movies(movies));
+        ReactGA.pageview('Homepage');
+
     }
 
-    render () {
-        const {Component, pageProps} = this.props;
 
+    render () {
+
+
+        const {Component, pageProps} = this.props;
         return <Container>
 
             {/* global sass styles
@@ -68,10 +89,11 @@ export default class MyApp extends App {
 
                 </aside>
 
-                <footer> Schedule A Showing
+                <footer>   <Link href="/Signup"><a>Schedule A Private Showing</a></Link>
                     <Link href="/"><a>Home</a></Link>
                     <Link href="/about"><a>About</a></Link>
-                    <a className="right" href="/Checkout">Get Pre-Approved</a>
+                    <a className="right" href="https://www.info.nmbhome.com/lcampbell">Get Pre-Approved</a>
+ 
                 </footer>
             </div>
             </Container>

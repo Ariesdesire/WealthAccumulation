@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -7,107 +7,110 @@ import StepContent from '@material-ui/core/StepContent';
 import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
+import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Container from '@material-ui/core/Container';
 import PropertyOverview from './PropertyOverview';
 import Neighborhood from './Neighborhood';
 import MonthlyPayments from './MonthlyPayments';
 import AmortizationSchedule from './AmortizationSchedule';
 import LoanOptions from './LoanOptions';
+import LoanOptionsSlider from './LoanOptionsSlider';
 import LoanPrograms from "./LoanPrograms";
+import MonthlyPaymentsFhaGetStarted from "./MonthlyPaymentsFhaGetStarted";
+import PropertyImages from "./propertyImages";
 
-const useStyles = makeStyles(theme => ({
+const ExpansionPanel = withStyles({
     root: {
-        width: '100%',
+        border: '1px solid rgba(0, 0, 0, .125)',
+        boxShadow: 'none',
+        '&:not(:last-child)': {
+            borderBottom: 0,
+        },
+        '&:before': {
+            display: 'none',
+        },
+        '&$expanded': {
+            margin: 'auto',
+        },
     },
-    button: {
-        marginTop: theme.spacing(1),
-        marginRight: theme.spacing(1),
-    },
-    actionsContainer: {
-        marginBottom: theme.spacing(2),
-    },
-    resetContainer: {
-        padding: theme.spacing(3),
-    },
-}));
-function getSteps() {
-    return ['Property Overview','Neighborhood', 'Mortgage Info', 'Amortization Schedule', 'Loan Options' ];
-}
+    expanded: {},
+})(MuiExpansionPanel);
 
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return <PropertyOverview />;
-        case 1:
-            return <Neighborhood />;
-        case 2:
-            return <LoanPrograms/>;
-        case 3:
-            return <AmortizationSchedule />;
-        case 4:
-            return <LoanOptions />;
-        default:
-            return 'Unknown step';
-    }
+const ExpansionPanelSummary = withStyles({
+    root: {
+        backgroundColor: 'rgba(0, 0, 0, .03)',
+        borderBottom: '1px solid rgba(0, 0, 0, .125)',
+        marginBottom: -1,
+        minHeight: 56,
+        '&$expanded': {
+            minHeight: 56,
+        },
+    },
+    content: {
+        '&$expanded': {
+            margin: '12px 0',
+        },
+    },
+    expanded: {},
+})(MuiExpansionPanelSummary);
+
+const ExpansionPanelDetails = withStyles(theme => ({
+    root: {
+        padding: theme.spacing(2),
+    },
+}))(MuiExpansionPanelDetails);
+function getSteps() {
+    return ['Property Overview','Neighborhood', 'Monthly Costs', 'Loan' +
+    ' Options' ];
 }
 
 export default function PropertyDetail() {
-    const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
+    const [expanded, setExpanded] = React.useState('panel1');
 
-    const handleNext = () => {
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
-    };
-
-    const handleReset = () => {
-        setActiveStep(0);
+    const handleChange = panel => (event, newExpanded) => {
+        setExpanded(newExpanded ? panel : false);
     };
 
     return (
-        <div className={classes.root}>
-            <Stepper activeStep={activeStep}  nonLinear orientation="vertical">
-                {steps.map((label, index) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                        <StepContent>
-                            <Typography>{getStepContent(index)}</Typography>
-                            <div className={classes.actionsContainer}>
-                                <div>
-                                    <Button
-                                        disabled={activeStep === 0}
-                                        onClick={handleBack}
-                                        className={classes.button}
-                                    >
-                                        Back
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={handleNext}
-                                        className={classes.button}
-                                    >
-                                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                    </Button>
-                                </div>
-                            </div>
-                        </StepContent>
-                    </Step>
-                ))}
-            </Stepper>
-            {activeStep === steps.length && (
-                <Paper square elevation={0} className={classes.resetContainer}>
-                    <Typography>All steps completed - you&apos;re finished</Typography>
-                    <Button onClick={handleReset} className={classes.button}>
-                        Reset
-                    </Button>
-                </Paper>
-            )}
+        <div>
+            <ExpansionPanel square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
+                    <Typography>Property Overview</Typography>
+                </ExpansionPanelSummary>
+                <Typography>
+
+                            <PropertyOverview />
+                </Typography>
+            </ExpansionPanel>
+            <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+                <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
+                    <Typography>Neighborhood</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+<Neighborhood />
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+                <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
+                    <Typography>Monthly Costs</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+
+<MonthlyPaymentsFhaGetStarted />
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                <ExpansionPanelSummary aria-controls="panel4d-content" id="panel4d-header">
+                    <Typography>Loan Programs</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+ <LoanOptionsSlider />
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
         </div>
     );
 }

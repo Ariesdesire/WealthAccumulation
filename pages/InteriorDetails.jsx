@@ -19,7 +19,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import PropertyVisuals from './PropertyVisuals';
+
 import PropertyTour from './PropertyTour';
 import Container from '@material-ui/core/Container';
 export default class InteriorDetails extends React.Component {

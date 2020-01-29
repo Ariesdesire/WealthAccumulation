@@ -32,7 +32,7 @@ const MyHeader = observer((props) => (
 
             <Typography variant="h6" >
                 <h1>Upwards Movement</h1>
-                <p className="author">teamwork makes the dream work</p>
+                <p className="author">Teamwork makes the Dreamwork</p>
 
             </Typography>
             {/*<p className="right">Listings: {store.count}</p>*/}

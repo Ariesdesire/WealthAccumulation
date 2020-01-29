@@ -229,20 +229,13 @@ Stylesheet______________________________________1_______407
 (Report by my Chrome extension [Page Size Inspector](https://chrome.google.com/webstore/detail/oepnndnpjiahgkljgbohnnccmokgcoln).)
 
 
-Need help?
+To Do!!!
 ----------
+Post To Contacts Api Point 
 
-Go ahead and take this React starter and perhaps my [RESTPie3 Python REST API
-server](https://github.com/tomimick/restpie3) too and build your great
-service.
+Work on Wealth Accumulation FHA and Conventional
 
-You can also [contact me](mailto:tomi.mickelsson@gmail.com) to ask if I am
-available for freelancing work.
 
-Vue version
------------
-
-If you prefer Vue over React, I have also coded this same starter with [Vue Nuxtjs](https://github.com/tomimick/tm-nuxtjs-starter).
 
 License
 -------

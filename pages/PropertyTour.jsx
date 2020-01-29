@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PropertyVirtualTour from './propertyVirtualTour';
 import PropertyVideo from "./propertyVideo";
-
+import PropertyImages from "./propertyImages";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-    return ['Interactive Floor Plan', 'Property Highlights', 'Photos'];
+    return ['Interactive Floor Plan', 'Property Highlights'];
 }
 
 function getStepContent(step) {
@@ -38,8 +38,7 @@ function getStepContent(step) {
             return <PropertyVirtualTour />;
         case 1:
             return <PropertyVideo />;
-        case 2:
-            return 'Add All the photos of the Property in a Grid';
+
         default:
             return 'Unknown step';
     }
@@ -187,19 +186,8 @@ export default function PropertyTour() {
                             >
                                 Next
                             </Button>
-                            {isStepOptional(activeStep) && !completed.has(activeStep) && (
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={handleSkip}
-                                    className={classes.button}
-                                >
-                                    Skip
-                                </Button>
-                            )}
-
                             {activeStep !== steps.length &&
-                            (completed.has(activeStep) ? (
+                            (completed[activeStep] ? (
                                 <Typography variant="caption" className={classes.completed}>
                                     Step {activeStep + 1} already completed
                                 </Typography>

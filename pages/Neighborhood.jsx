@@ -15,18 +15,14 @@ import { Player } from 'video-react';
 import api from "../config"
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GoogleMapReact from 'google-map-react';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import PropertyVisuals from './PropertyVisuals';
-import PropertyTour from './PropertyTour';
-import Container from '@material-ui/core/Container';
+
 
 const style = {
     width: '400px',
-    height: '300px'
+    height: '400px'
 }
+
+const AnyReactComponent = ({text}) => <div>{text}</div>;
 export default class Neighborhood extends React.Component {
 
     // query params to props
@@ -34,8 +30,8 @@ export default class Neighborhood extends React.Component {
         return {id};
     }
     static defaultProps = {
-        center: {lat: 40.73, lng: -73.93},
-        zoom: 12
+        center: {lat: 40.878946, lng: -73.854380},
+        zoom: 16
     }
 //the center coordinates are NYC. I chose 12 as the zoom because it didn’t seem too far away or too close. The higher the number you choose, the more you zoom in on the map.
     constructor(props) {
@@ -76,24 +72,41 @@ export default class Neighborhood extends React.Component {
     }
 
     render () {
+
+        //Marker Component
+        const Marker = ({text}) => {
+            return (
+                <div><b>{text}</b></div>
+            );
+        }
+
         return (
             <React.Fragment>
 
                 <CssBaseline />
 
                 <GoogleMapReact
-                    style={{width: '100%', height: 300, position: 'relative'}}
+                    style={{width: '100%', height: 400, position: 'relative'}}
                     bootstrapURLKeys={{
                         key: 'AIzaSyBxiIepV_8nY4hq4slxiEAQ1TWJ56vSnYc',
                         language: 'en'
                     }}
-                    defaultCenter={this.props.center}
-                    center={this.state.center}
+                    defaultCenter={{lat: this.state.movie.latitude, lng: this.state.movie.longitude}}
+                    center={{lat: this.state.movie.latitude, lng: this.state.movie.longitude}}
+                    layerTypes={[ 'TransitLayer']}
                     defaultZoom={this.props.zoom}
                     onChildMouseEnter={this.onChildMouseEnter}
-                    onChildMouseLeave={this.onChildMouseLeave}
+                    onChildMouseLeave={this.onChildMouseLeave}>
+                <Marker
+                    style={{ height: '50vh',
+                        width: '90%' }}
 
+                    lat = { this.state.movie.latitude}
+                    lng = {this.state.movie.longitude}
+                    text = {this.state.movie.address}
                 />
+
+            </ GoogleMapReact >
 
 
             </React.Fragment>

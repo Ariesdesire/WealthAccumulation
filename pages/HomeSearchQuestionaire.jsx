@@ -10,9 +10,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-
-import PropertyVirtualTour from './propertyVirtualTour';
-import PropertyVideo from "./propertyVideo";
+import AddressForm from './AddressForm';
+import PaymentForm from './PaymentForm';
+import Review from './Review';
 
 function Copyright() {
     return (
@@ -62,21 +62,22 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const steps = ['Virtual Tour', 'Video'];
+const steps = ['Area Information', 'Payment details', 'Review your order'];
 
 function getStepContent(step) {
     switch (step) {
         case 0:
-            return <PropertyVirtualTour />;
+            return <AddressForm />;
         case 1:
-            return <PropertyVideo />;
-
+            return <PaymentForm />;
+        case 2:
+            return <Review />;
         default:
             throw new Error('Unknown step');
     }
 }
 
-export default function PropertyVisuals() {
+export default function Checkout() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
 
@@ -103,10 +104,9 @@ export default function PropertyVisuals() {
                     <Typography component="h1" variant="h4" align="center">
                         Checkout
                     </Typography>
-                    <Stepper nonLinear activeStep={activeStep} className={classes.stepper}>
+                    <Stepper activeStep={activeStep} className={classes.stepper}>
                         {steps.map(label => (
                             <Step key={label}>
-
                                 <StepLabel>{label}</StepLabel>
                             </Step>
                         ))}

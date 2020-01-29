@@ -14,6 +14,7 @@
 import axios from "axios"
 
 const URL_MOVIES = "https://honestscales.herokuapp.com/api/listings";
+const URL_PAYMENTS = "https://honestscales.herokuapp.com/api/payments";
 
 class ServerAPI {
 
@@ -31,6 +32,10 @@ class ServerAPI {
 
     get_movie(id) {
         let url = `${URL_MOVIES}/${id}`;
+        return this.client.get(url).then(reply => {return reply.data});
+    }
+    get_payment(id) {
+        let url = `${URL_PAYMENTS}/${id}`;
         return this.client.get(url).then(reply => {return reply.data});
     }
 
