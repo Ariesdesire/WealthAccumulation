@@ -63,23 +63,20 @@ export default class  WealthAccumulation5YearsConventional extends PureComponent
 
 
 
-    classes = useStyles();
     render() {
         return (
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
+
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
                     timeout: 500,
                 }}
             >
-                <Fade in={open}>
-                    <div className={classes.paper}>
+                <Fade >
+                    <div >
                         <h2 id="transition-modal-title">Wealth accumulation - Conventional: 20% down</h2>
                         <p id="transition-modal-description">10 Years Analysis.</p>
             <ResponsiveContainer width="100%" height={500}>

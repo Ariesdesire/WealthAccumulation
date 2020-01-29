@@ -82,9 +82,9 @@ class About extends React.Component {
 
 
 </Box>
-                    <Typography variant = 'body1'>{movie.totalBedrooms} Bedrooms <span>&nbsp;</span>
-                         {movie.totalBathrooms} Bathrooms {movie.squareFeet} Sq Ft
-                       </Typography>
+                    {/*<Typography variant = 'body1'>{movie.totalBedrooms} Bedrooms <span>&nbsp;</span>*/}
+                    {/*     {movie.totalBathrooms} Bathrooms {movie.squareFeet} Sq Ft*/}
+                    {/*   </Typography>*/}
 
                 </CardContent>
 

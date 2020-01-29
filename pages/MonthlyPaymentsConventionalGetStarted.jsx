@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default class MonthlyPaymentsStart extends React.Component {
-    classes = useStyles();
+
     // query params to props
     static getInitialProps({query: { id }}) {
         return {id};
@@ -152,7 +152,7 @@ export default class MonthlyPaymentsStart extends React.Component {
 
                 </Grid>
 
-                <div className={classes.root}>
+                <div >
 
                     <Button variant="contained" color="primary">
                       5 years wealth Accumulation
