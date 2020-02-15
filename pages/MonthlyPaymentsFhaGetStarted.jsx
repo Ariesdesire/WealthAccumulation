@@ -34,8 +34,33 @@ import FhaMonthlyPaymentsChart from "./MonthlyPaymentsChart";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import MonthlyEquityChartFha5 from "./MonthlyEquityChartFha5";
+import MonthlyEquityChartFha10 from "./MonthlyEquityChartFha10";
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
+import  Pagination  from "../components/Pagination"
+import Monthly2000RentIncrease from "./Monthly2000RentIncrease";
 
-import WealthAccumulation5YearsFha from './WealthAccumulationFha';
+const styles = {
+    root: {
+        position: 'relative',
+    },
+    slide: {
+        padding: 15,
+        minHeight: 100,
+
+    },
+    slide1: {
+        backgroundColor: '#FEA900',
+    },
+    slide2: {
+        backgroundColor: '#B3DC4A',
+    },
+    slide3: {
+        backgroundColor: '#6AC0FF',
+    },
+};
+
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
@@ -61,7 +86,9 @@ export default class MonthlyPaymentsFhaGetStarted extends React.Component {
 
         this.state = {
             show: false,
+            index: 0,
             movie:{}};
+
 
     }
 
@@ -81,7 +108,11 @@ export default class MonthlyPaymentsFhaGetStarted extends React.Component {
     hideModal = () => {
         this.setState({ show: false });
     };
-
+    handleChangeIndex = index => {
+        this.setState({
+            index,
+        });
+    };
     onDelete(e) {
         e.preventDefault();
 
@@ -101,6 +132,7 @@ export default class MonthlyPaymentsFhaGetStarted extends React.Component {
 
 
     render () {
+        const { index } = this.state.index;
         return (
 
             <React.Fragment>
@@ -122,7 +154,7 @@ export default class MonthlyPaymentsFhaGetStarted extends React.Component {
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={5}>
 
                         <List
                             component="ul"
@@ -152,13 +184,18 @@ export default class MonthlyPaymentsFhaGetStarted extends React.Component {
 
                                 <ListItemText primary="Upfront Mortgage Insurance"  secondary=<NumberFormat value={this.state.movie.UpfrontMortgageInsurancePremium}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
                             </ListItem>
+
+                            <ListItem button>
+
+                                <ListItemText primary="Cash To Close"  secondary=<NumberFormat value={this.state.movie.fhaCashToClose}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
+                            </ListItem>
                             <ListItem button>
 
                                 <ListItemText primary="Loan Amount"  secondary=<NumberFormat value={this.state.movie.fhaLoanAmount}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
                             </ListItem>
                             <ListItem button>
 
-                                <ListItemText primary="Cash To Close"  secondary=<NumberFormat value={this.state.movie.fhaCashToClose}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
+                                <ListItemText primary="Rate"  secondary=<NumberFormat value={this.state.movie.rate}  displayType={'text'} decimalSeparator={'.'}  suffix={'%'} /> />
                             </ListItem>
                             <ListSubheader component="div" id="Estimated Monthly Costs">
                                 Estimated Monthly Payments
@@ -170,22 +207,27 @@ export default class MonthlyPaymentsFhaGetStarted extends React.Component {
                     <Grid item xs={12} md={6}>
                         <FhaMonthlyPaymentsChart />
                     </Grid>
-                    <Grid item xs={12} md={6}>
-                        <WealthAccumulation5YearsFha />
+                    <Grid item xs={12}>
+
+                        <Typography variant="h6" gutterBottom align="center">
+                            Wealth Accumulation
+                        </Typography>
+                        <Typography variant="body1" gutterBottom  align="center">
+                            10 Year Analysis
+                        </Typography>
+                        <MonthlyEquityChartFha10 />
+                    </Grid>                 <Grid item xs={12}>
+
+                        <Typography variant="h6" gutterBottom align="center">
+                          Estimated Rent Increase
+                        </Typography>
+                        <Typography variant="body1" gutterBottom  align="center">
+                            10 Year Analysis
+                        </Typography>
+            <Monthly2000RentIncrease />
                     </Grid>
 
-<Grid>
-    <div>
 
-        <Button variant="contained" color="primary"  >
-            5 years wealth Accumulation
-        </Button>
-        <Button variant="contained" color="secondary">
-            10 years wealth Accumulation
-        </Button>
-
-    </div>
-</Grid>
                 </Grid>
 
 

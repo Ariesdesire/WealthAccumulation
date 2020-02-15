@@ -7,6 +7,7 @@ import StepContent from '@material-ui/core/StepContent';
 import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -22,6 +23,10 @@ import LoanOptionsSlider from './LoanOptionsSlider';
 import LoanPrograms from "./LoanPrograms";
 import MonthlyPaymentsFhaGetStarted from "./MonthlyPaymentsFhaGetStarted";
 import PropertyImages from "./propertyImages";
+import MonthlyRentVsOwnSummary from "./MonthlyRentVsOwnSummary";
+import LoanOptionsTabs from "./LoanOptionsTabs";
+import Monthly2000RentVsEquity from "./Monthly2000RentvsEquity";
+import Monthly2000RentIncrease from "./Monthly2000RentIncrease";
 
 const ExpansionPanel = withStyles({
     root: {
@@ -64,8 +69,8 @@ const ExpansionPanelDetails = withStyles(theme => ({
     },
 }))(MuiExpansionPanelDetails);
 function getSteps() {
-    return ['Property Overview','Neighborhood', 'Monthly Costs', 'Loan' +
-    ' Options' ];
+    return ['Property Overview','Neighborhood','Monthly Costs', 'Loan' +
+    ' Options', 'Summary' ];
 }
 
 export default function PropertyDetail() {
@@ -94,13 +99,36 @@ export default function PropertyDetail() {
 <Neighborhood />
                 </ExpansionPanelDetails>
             </ExpansionPanel>
+
+            <ExpansionPanel square expanded={expanded === 'panel6'} onChange={handleChange('panel6')}>
+                <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
+
+                    <Typography>Summary</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="flex-end"
+
+                    >
+                        <Grid item md={6}>
+<MonthlyRentVsOwnSummary />
+                        </Grid>
+                        <Grid item md={6}>
+<Monthly2000RentVsEquity />
+                        </Grid>
+                    </Grid>
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
             <ExpansionPanel square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                 <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
                     <Typography>Monthly Costs</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
 
-<MonthlyPaymentsFhaGetStarted />
+                    <LoanOptionsTabs />
                 </ExpansionPanelDetails>
             </ExpansionPanel>
             <ExpansionPanel square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>

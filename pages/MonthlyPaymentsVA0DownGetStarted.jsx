@@ -31,16 +31,36 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import Divider from '@material-ui/core/Divider';
 import NumberFormat from 'react-number-format';
 import FhaMonthlyPaymentsChart from "./MonthlyPaymentsChart";
+import MonthlyPaymentChartVa0Down from "./MonthlyPaymentsChartVA0Down";
 import Grid from '@material-ui/core/Grid';
-import MonthlyEquity from "./MonthlyEquityChart";
-import ConventionalMonthlyPaymentChart
-    from "./MonthlyPaymentsChartConventional";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MonthlyEquityChartFha5 from "./MonthlyEquityChartFha5";
-import MonthlyEquityChartConventional5 from "./MonthlyEquityChartConventional5";
-import MonthlyEquityChartConventional10
-    from "./MonthlyEquityChartConventional10";
+import MonthlyEquityChartFha10 from "./MonthlyEquityChartFha10";
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
+import  Pagination  from "../components/Pagination"
+import MonthlyEquityChartVa0Down from "./MonthlyEquityChartVa0Down";
+
+const styles = {
+    root: {
+        position: 'relative',
+    },
+    slide: {
+        padding: 15,
+        minHeight: 100,
+
+    },
+    slide1: {
+        backgroundColor: '#FEA900',
+    },
+    slide2: {
+        backgroundColor: '#B3DC4A',
+    },
+    slide3: {
+        backgroundColor: '#6AC0FF',
+    },
+};
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -50,7 +70,9 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default class MonthlyPaymentsConventionalGetStarted extends React.Component {
+
+export default class MonthlyPaymentsVA0DownGetStarted extends React.Component {
+
 
     // query params to props
     static getInitialProps({query: { id }}) {
@@ -63,7 +85,11 @@ export default class MonthlyPaymentsConventionalGetStarted extends React.Compone
         this.onDelete = this.onDelete.bind(this);
         this.onBack = this.onBack.bind(this);
 
-        this.state = {movie:{}};
+        this.state = {
+            show: false,
+            index: 0,
+            movie:{}};
+
 
     }
 
@@ -76,7 +102,18 @@ export default class MonthlyPaymentsConventionalGetStarted extends React.Compone
 
         api.get_payment(movie_id).then(d => this.setState({movie: d}));
     }
+    showModal = () => {
+        this.setState({ show: true });
+    };
 
+    hideModal = () => {
+        this.setState({ show: false });
+    };
+    handleChangeIndex = index => {
+        this.setState({
+            index,
+        });
+    };
     onDelete(e) {
         e.preventDefault();
 
@@ -93,8 +130,12 @@ export default class MonthlyPaymentsConventionalGetStarted extends React.Compone
         Router.back();
     }
 
+
+
     render () {
+        const { index } = this.state.index;
         return (
+
             <React.Fragment>
                 <CssBaseline />
 
@@ -110,19 +151,19 @@ export default class MonthlyPaymentsConventionalGetStarted extends React.Compone
                             How much house can I afford
                         </Typography>
                         <Typography variant="body1" gutterBottom  align="center">
-                           Conventional 20% Down
+                            VA 0% Down
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={12} md={5}>
+                    <Grid item xs={12} md={6}>
 
                         <List
                             component="ul"
                             aria-labelledby="Estimated-Monthly-Costs"
                             subheader={
                                 <ListSubheader component="div" id="Estimated Monthly Costs">
-                                    Estimated Annual Income Needed
-                                    <NumberFormat value={this.state.movie.conventionalIncomeNeeded } displayType={'text'} thousandSeparator={true}  prefix={' $'} />
+                                    Estimated Annual Income
+                                    <NumberFormat value={this.state.movie.VaIncomeNeeded0Down} displayType={'text'} thousandSeparator={true}  prefix={' $'} />
                                 </ListSubheader>
                             }
 
@@ -134,34 +175,31 @@ export default class MonthlyPaymentsConventionalGetStarted extends React.Compone
 
                             <ListItem button>
 
-                                <ListItemText primary="Down Payment"  secondary=  <NumberFormat value= {this.state.movie.ConventionalDownPayment} displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
+                                <ListItemText primary="Down Payment"  secondary=  <NumberFormat value= {this.state.movie.VADownPaymentAmount} displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
                             </ListItem>
                             <ListItem button>
 
-                                <ListItemText primary="Closing Costs"  secondary=<NumberFormat value={this.state.movie.ConventionalClosingCostAmount}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
+                                <ListItemText primary="Funding Fee 2.3%"  secondary=<NumberFormat value={this.state.movie.VaFundingFee0Down}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
                             </ListItem>
+
+
                             <ListItem button>
 
-                                <ListItemText primary="Cash To Close"  secondary=<NumberFormat value={this.state.movie.conventionalCashToClose}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
-                            </ListItem>
-                            <ListItem button>
-
-                                <ListItemText primary="Loan Amount"  secondary=<NumberFormat value={this.state.movie.conventionalLoanAmount}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
+                                <ListItemText primary="Cash To Close"  secondary=<NumberFormat value={this.state.movie.VaCashToClose0Down}  displayType={'text'} thousandSeparator={true}  prefix={'$'} /> />
                             </ListItem>
                             <ListItem button>
 
                                 <ListItemText primary="Rate"  secondary=<NumberFormat value={this.state.movie.rate}  displayType={'text'} decimalSeparator={'.'}  suffix={'%'} /> />
                             </ListItem>
                             <ListSubheader component="div" id="Estimated Monthly Costs">
-                                Estimated Monthly Costs
-                                <NumberFormat value={this.state.movie.ConventionalMonthlyPayments} displayType={'text'} thousandSeparator={true}  prefix={' $'} />
+                                Estimated Monthly Payments
+                                <NumberFormat value={this.state.movie.VaMonthlyEstimatedPayments0Down} displayType={'text'} thousandSeparator={true}  prefix={' $'} />
                             </ListSubheader>
-
                         </List>
 
                     </Grid>
-                    <Grid xs={12} md={7}>
-                        <ConventionalMonthlyPaymentChart />
+                    <Grid item xs={12} md={6}>
+                        <MonthlyPaymentChartVa0Down />
                     </Grid>
                     <Grid item xs={12}>
 
@@ -171,18 +209,10 @@ export default class MonthlyPaymentsConventionalGetStarted extends React.Compone
                         <Typography variant="body1" gutterBottom  align="center">
                             5 Year Analysis
                         </Typography>
-                        <MonthlyEquityChartConventional5 />
+                        <MonthlyEquityChartVa0Down />
                     </Grid>
-                    <Grid item xs={12}>
 
-                        <Typography variant="h6" gutterBottom align="center">
-                            Wealth Accumulation
-                        </Typography>
-                        <Typography variant="body1" gutterBottom  align="center">
-                            10 Year Analysis
-                        </Typography>
-                        <MonthlyEquityChartConventional10 />
-                    </Grid>
+
 
                 </Grid>
 

@@ -13,7 +13,7 @@ import Head from 'next/head'
 import Router from 'next/router'
 import { Player } from 'video-react';
 import api from "../config"
-
+import Grid from '@material-ui/core/Grid';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';

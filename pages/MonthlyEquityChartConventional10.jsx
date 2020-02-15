@@ -4,29 +4,8 @@ import {ResponsiveContainer,
 } from 'recharts';
 import api from "../config";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 
-
-
-const useStyles = makeStyles(theme => ({
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    paper: {
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-    },
-}));
-
-
-export default class WealthAccumulation5YearsFha extends PureComponent {
+export default class MonthlyEquityChartConventional10 extends PureComponent {
     // query params to props
     static getInitialProps({query: { id }}) {
         return {id};
@@ -37,7 +16,7 @@ export default class WealthAccumulation5YearsFha extends PureComponent {
         //state to store active index and chart data
         this.state = {
 
-                open: false,
+            open: false,
             chartData: []
 
         };
@@ -57,7 +36,7 @@ export default class WealthAccumulation5YearsFha extends PureComponent {
                 console.log(result);
                 //extracting required data only
 
-                return result.WealthAccumulation5years;
+                return result.ConventionalWealthAccumulation10years;
             })
             //setting fetched data to state
             .then(result => this.setState({ chartData: result }));
@@ -68,27 +47,13 @@ export default class WealthAccumulation5YearsFha extends PureComponent {
         this.props.onClose && this.props.onClose(e);
     };
 
+
+
     render() {
-        if (!this.props.open) {
-            return null;
-        }
         return (
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
 
-
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade >
-                    <div >
-                        <h2 id="transition-modal-title">Wealth Accumulation - FHA 3.5% down</h2>
-                        <p id="transition-modal-description">5 Years Analysis</p>
             <ResponsiveContainer width="100%" height={500}>
+
                 <LineChart
 
                     data={this.state.chartData}
@@ -104,15 +69,10 @@ export default class WealthAccumulation5YearsFha extends PureComponent {
                     <Legend />
                     <Line type="monotone" dataKey="Principal paid" stroke="#55efc4" activeDot={{ r: 8 }} />
                     <Line type="monotone" dataKey="Home Apprec." stroke="#fdcb6e"  />
-                    <Line type="monotone" dataKey="Taxes saved" stroke="#d63031" />
+                    <Line type="monotone" dataKey="Taxes Saved" stroke="#7f8c8d" />
                     <Line type="monotone" dataKey="Wealth Accum." stroke="#d63031" />
                 </LineChart>
-
-                    </ResponsiveContainer>
-                </div>
-            </Fade>
-            </Modal>
+            </ResponsiveContainer>
         );
     }
-
 }
