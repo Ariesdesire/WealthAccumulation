@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@zeit/next-sass": "^1.0.1",
-    "node-sass": "^4.9.3",
+    "node-sass": "^7.0.0",
     "react-pure-render": "^1.0.2",
     "video.js": "^7.6.6",
     "webpack": "^4.19.1"
